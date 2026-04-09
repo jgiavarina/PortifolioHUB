@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>portfolioHUB — João Pedro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0057c8;
+    --blue-light: #006ae8;
+    --blue-pale: #f0f5fd;
+    --dark: #0d0d0d;
+    --gray: #6b6b6b;
+    --gray-light: #f5f5f5;
+    --white: #ffffff;
+    --border: #e8e8e8;
+    --accent: #3d8fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--dark); text-decoration: none;
+  }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.04em;
+    text-decoration: none; color: var(--gray);
+    transition: color 0.2s; text-transform: uppercase;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,87,200,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+    border: 1px solid var(--blue); border-radius: 100px;
+    padding: 0.35rem 1rem; margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 800; line-height: 1.05; margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { color: var(--blue); font-style: normal; }
+  .hero-bio {
+    font-size: 1.05rem; line-height: 1.75; color: var(--gray);
+    max-width: 480px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 8px;
+    font-weight: 500; font-size: 0.9rem; text-decoration: none;
+    transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,87,200,0.3); }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--dark); background: transparent; }
+  .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .avatar-frame {
+    width: 320px; height: 320px;
+    border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+    background: linear-gradient(135deg, var(--blue) 0%, #6fa8ff 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: morphBlob 8s ease-in-out infinite;
+  }
+  @keyframes morphBlob {
+    0%,100% { border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%; }
+    33%      { border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; }
+    66%      { border-radius: 45% 55% 60% 40% / 55% 45% 45% 55%; }
+  }
+  .avatar-inner {
+    width: 90%; height: 90%; border-radius: inherit;
+    background: var(--blue-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+  }
+  .hero-contacts {
+    display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .contact-pill {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; border-radius: 100px;
+    background: var(--gray-light); font-size: 0.82rem; color: var(--gray);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .contact-pill:hover { background: var(--blue); color: #fff; }
+  .contact-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--blue);
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+    line-height: 1.1; margin-bottom: 3.5rem;
+  }
+
+  /* ── CURRICULO ── */
+  .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .cv-col h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--blue);
+  }
+  .cv-item { margin-bottom: 1.75rem; position: relative; padding-left: 1.25rem; }
+  .cv-item::before {
+    content: ''; position: absolute; left: 0; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
+  }
+  .cv-item-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .cv-item-sub { font-size: 0.85rem; color: var(--blue); font-weight: 500; margin-bottom: 0.35rem; }
+  .cv-item-date { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.5rem; font-style: italic; }
+  .cv-item-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.6; }
+
+  .no-exp-box {
+    background: var(--blue-pale);
+    border: 1px dashed rgba(0,87,200,0.3);
+    border-radius: 12px; padding: 1.5rem;
+    color: var(--gray); font-size: 0.9rem; line-height: 1.7;
+  }
+  .no-exp-box strong { color: var(--blue); display: block; margin-bottom: 0.5rem; font-size: 1rem; }
+
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+  .skill-tag {
+    padding: 0.4rem 0.9rem; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 500;
+    background: var(--blue-pale); color: var(--blue);
+    border: 1px solid rgba(0,87,200,0.2);
+  }
+
+  /* ── PROJETOS ── */
+  #projetos { background: var(--dark); }
+  #projetos .section-label { color: var(--accent); }
+  #projetos .section-label::after { background: var(--accent); }
+  #projetos .section-title { color: var(--white); }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: #1a1a1a; border-radius: 16px; padding: 2rem;
+    border: 1px solid #2a2a2a; transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: #3a3a3a; transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .project-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: #fff; margin-bottom: 0.75rem; }
+  .project-desc { font-size: 0.88rem; color: #999; line-height: 1.65; margin-bottom: 1.25rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .project-tag { font-size: 0.72rem; padding: 0.3rem 0.75rem; border-radius: 100px; background: #2a2a2a; color: #aaa; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem; color: var(--accent); text-decoration: none; font-weight: 500;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.7rem; }
+
+  /* ── HABILIDADES ── */
+  #habilidades { background: var(--blue-pale); }
+  .habilidades-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+  .hab-card {
+    background: #fff; border-radius: 16px; padding: 1.75rem;
+    border: 1px solid var(--border); transition: all 0.3s; text-align: center;
+  }
+  .hab-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,87,200,0.1); border-color: rgba(0,87,200,0.2); }
+  .hab-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .hab-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .hab-level-bar { height: 4px; background: var(--border); border-radius: 100px; overflow: hidden; margin-top: 0.75rem; }
+  .hab-level-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 100px; }
+  .hab-label { font-size: 0.75rem; color: var(--gray); margin-top: 0.4rem; }
+
+  /* ── RECOMENDAÇÕES ── */
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .testimonial-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem; position: relative; transition: all 0.3s;
+  }
+  .testimonial-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .quote-mark {
+    font-family: Georgia, serif; font-size: 5rem; line-height: 1;
+    color: var(--blue); opacity: 0.15;
+    position: absolute; top: 0.5rem; left: 1.5rem;
+  }
+  .testimonial-text { font-size: 0.93rem; line-height: 1.75; color: var(--gray); margin-bottom: 1.5rem; padding-top: 1rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  }
+  .author-name { font-weight: 600; font-size: 0.9rem; }
+  .author-role { font-size: 0.78rem; color: var(--gray); }
+
+  /* ── DIVIDER ── */
+  .blue-divider {
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--blue) 0%, transparent 100%);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); color: #888;
+    text-align: center; padding: 3rem; font-size: 0.85rem;
+  }
+  footer strong { color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; text-align: center; }
+    .hero-visual { display: none; }
+    .hero-bio { margin: 0 auto 2rem; }
+    .hero-ctas, .hero-contacts { justify-content: center; }
+    section { padding: 4rem 1.5rem; }
+    .cv-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">portfolio<span>HUB</span></a>
+  <ul class="nav-links">
+    <li><a href="#perfil">Perfil</a></li>
+    <li><a href="#curriculo">Currículo</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+
+  </ul>
+</nav>
+
+<!-- HERO / PERFIL -->
+<section id="perfil" class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">📍 Brasília, Brasil · Buscando oportunidades</div>
+    <h1>Olá, eu sou<br><em>João Pedro</em></h1>
+    <p class="hero-bio">
+      Estudante de Ciências da Computação (1º semestre) no UniCEUB, apaixonado por tecnologia,
+      segurança de redes e desenvolvimento de software. Em busca da minha primeira experiência
+      profissional para crescer e contribuir com soluções digitais de impacto.
+    </p>
+
+    <div class="hero-contacts">
+      <a href="mailto:joaogiavarina@gmail.com" class="contact-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        joaogiavarina@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-d-a-giavarina-e-alcantara-a650082b8/" target="_blank" class="contact-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/jgiavarina" target="_blank" class="contact-pill">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-frame">
+      <div class="avatar-inner">🧑‍💻</div>
+    </div>
+  </div>
+</section>
+
+<div class="blue-divider"></div>
+
+<!-- CURRICULO -->
+<section id="curriculo">
+  <div class="section-inner">
+    <div class="section-label">02 — Currículo</div>
+    <h2 class="section-title">Formação &<br>Experiência</h2>
+
+    <div class="cv-grid">
+      <div class="cv-col">
+        <h3>🎓 Formação Acadêmica</h3>
+
+        <div class="cv-item">
+          <div class="cv-item-title">Bacharelado em Ciências da Computação</div>
+          <div class="cv-item-sub">UniCEUB — Centro Universitário de Brasília</div>
+          <div class="cv-item-date">2025 – Cursando (1º Semestre)</div>
+          <div class="cv-item-desc">Formação em fundamentos de computação, lógica de programação, algoritmos e estruturas de dados. Construindo uma base sólida para a carreira em tecnologia.</div>
+        </div>
+
+        <h3 style="margin-top:2.5rem;">📜 Certificações & Cursos</h3>
+
+        <div class="cv-item">
+          <div class="cv-item-title">Python — Nível Intermediário</div>
+          <div class="cv-item-sub">Alura</div>
+          <div class="cv-item-date">2024</div>
+          <div class="cv-item-desc">Programação orientada a objetos, manipulação de arquivos, bibliotecas e boas práticas com Python.</div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-title">Redes de Computadores</div>
+          <div class="cv-item-sub">Alura</div>
+          <div class="cv-item-date">2024</div>
+          <div class="cv-item-desc">Fundamentos de redes, protocolos TCP/IP, modelo OSI, configuração e diagnóstico de redes.</div>
+        </div>
+
+        <div class="cv-item">
+          <div class="cv-item-title">Segurança de Rede</div>
+          <div class="cv-item-sub">Alura</div>
+          <div class="cv-item-date">2024</div>
+          <div class="cv-item-desc">Conceitos de cibersegurança, proteção de redes, ameaças digitais e boas práticas de segurança.</div>
+        </div>
+
+        <h3 style="margin-top:2rem;">🌍 Idiomas</h3>
+        <div class="skills-grid">
+          <span class="skill-tag">Português — Nativo</span>
+          <span class="skill-tag">Inglês — Em desenvolvimento</span>
+        </div>
+      </div>
+
+      <div class="cv-col">
+        <h3>💼 Experiências Profissionais</h3>
+
+        <div class="no-exp-box">
+          <strong>🚀 Em busca da primeira oportunidade!</strong>
+          Ainda não possuo experiência profissional formal, mas estou em constante aprendizado através de cursos, certificações e projetos acadêmicos. Motivado e pronto para contribuir e crescer junto com uma equipe.
+        </div>
+
+        <h3 style="margin-top:2.5rem;">🛠️ Habilidades Técnicas</h3>
+        <div class="skills-grid">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Git & GitHub</span>
+          <span class="skill-tag">HTML & CSS</span>
+          <span class="skill-tag">Redes TCP/IP</span>
+          <span class="skill-tag">Segurança de Rede</span>
+          <span class="skill-tag">Linux (básico)</span>
+          <span class="skill-tag">Lógica de Programação</span>
+        </div>
+
+        <h3 style="margin-top:2rem;">🤝 Competências Pessoais</h3>
+        <div class="skills-grid">
+          <span class="skill-tag">Proatividade</span>
+          <span class="skill-tag">Trabalho em equipe</span>
+          <span class="skill-tag">Resolução de problemas</span>
+          <span class="skill-tag">Aprendizado rápido</span>
+          <span class="skill-tag">Comunicação</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blue-divider"></div>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="section-inner">
+    <div class="section-label">03 — Projetos</div>
+    <h2 class="section-title">Projetos Acadêmicos<br>& Pessoais</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">🌐</div>
+        <div class="project-title">portfolioHUB</div>
+        <div class="project-desc">Este portfólio digital, desenvolvido com HTML, CSS e JavaScript puro como entrega do desafio acadêmico. Responsivo, com animações e publicado via GitHub Pages.</div>
+        <div class="project-tags">
+          <span class="project-tag">HTML</span>
+          <span class="project-tag">CSS</span>
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🐍</div>
+        <div class="project-title">Projetos em Python</div>
+        <div class="project-desc">Coleção de exercícios e mini-projetos desenvolvidos durante o curso intermediário de Python na Alura, incluindo scripts de automação, manipulação de dados e OOP.</div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">OOP</span>
+          <span class="project-tag">Automação</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🔐</div>
+        <div class="project-title">Estudo de Segurança de Redes</div>
+        <div class="project-desc">Documentação produzida durante o curso de Segurança de Rede na Alura, com mapeamento de ameaças, análise de vulnerabilidades e boas práticas de mitigação.</div>
+        <div class="project-tags">
+          <span class="project-tag">Segurança</span>
+          <span class="project-tag">Redes</span>
+          <span class="project-tag">Documentação</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="blue-divider"></div>
+
+<!-- HABILIDADES -->
+<section id="habilidades">
+  <div class="section-inner">
+    <div class="section-label">04 — Habilidades</div>
+    <h2 class="section-title">Competências<br>Técnicas & Pessoais</h2>
+
+    <div class="habilidades-grid">
+
+      <div class="hab-card">
+        <div class="hab-icon">🐍</div>
+        <div class="hab-name">Python</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:60%"></div></div>
+        <div class="hab-label">Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🌐</div>
+        <div class="hab-name">HTML & CSS</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:50%"></div></div>
+        <div class="hab-label">Básico / Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🐙</div>
+        <div class="hab-name">Git & GitHub</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:50%"></div></div>
+        <div class="hab-label">Básico / Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🖧</div>
+        <div class="hab-name">Redes de Computadores</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:65%"></div></div>
+        <div class="hab-label">Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🔐</div>
+        <div class="hab-name">Segurança de Rede</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:55%"></div></div>
+        <div class="hab-label">Básico / Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🧠</div>
+        <div class="hab-name">Lógica de Programação</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:70%"></div></div>
+        <div class="hab-label">Intermediário</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">🤝</div>
+        <div class="hab-name">Trabalho em Equipe</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:90%"></div></div>
+        <div class="hab-label">Excelente</div>
+      </div>
+
+      <div class="hab-card">
+        <div class="hab-icon">📚</div>
+        <div class="hab-name">Aprendizado Contínuo</div>
+        <div class="hab-level-bar"><div class="hab-level-fill" style="width:95%"></div></div>
+        <div class="hab-label">Excelente</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <p>portfolioHUB · 2026</p>
+  <p style="margin-top:0.5rem; font-size:0.78rem;">Desenvolvido com HTML, CSS & JavaScript · Publicado via GitHub Pages</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.cv-item, .project-card, .hab
