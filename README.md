@@ -1,0 +1,1 @@
+O link do meu site está listado em: Link site. Utilizei auxilio de inteligencia artificial para criar o site e coloquei no github pages como foi pedido. Criei o index.html para colocar o código da minha página.
